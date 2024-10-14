@@ -71,18 +71,11 @@ public class Application {
 
             System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
             String userCmdInput = Console.readLine();
-            int parsedInput;
 
-            try {
-                parsedInput = Integer.parseInt(userCmdInput);
-            } catch (NumberFormatException e) {
+            if (!(userCmdInput.equals("1") || userCmdInput.equals("2")))
                 throw new IllegalArgumentException("숫자 1 또는 2를 입력해야 합니다.");
-            }
 
-            if (parsedInput != 1 && parsedInput != 2)
-                throw new IllegalArgumentException("답변은 1과 2중 하나를 입력해야 합니다.");
-
-            if (parsedInput == 2)
+            if (userCmdInput.equals("2"))
                 inGame = false;
         }
     }
