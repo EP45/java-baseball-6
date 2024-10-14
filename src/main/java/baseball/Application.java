@@ -23,12 +23,12 @@ public class Application {
             boolean inGame = true;
             while (inGame) {
                 System.out.print("숫자를 입력해주세요 : ");
-                String userRawInput = Console.readLine();
+                String userGameInput = Console.readLine();
                 int parsedInput;
 
                 // Parse if number
                 try {
-                    parsedInput = Integer.parseInt(userRawInput);
+                    parsedInput = Integer.parseInt(userGameInput);
                 } catch (NumberFormatException e) {
                     throw new IllegalArgumentException("숫자를 입력해야 합니다.");
                 }
@@ -61,7 +61,6 @@ public class Application {
                         ball++;
                     }
                 }
-
                 ball -= strike;
 
                 if (ball != 0)
@@ -77,23 +76,24 @@ public class Application {
                 if (strike == 3) {
                     System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
                     inGame = false;
-                    System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
-                    userRawInput = Console.readLine();
-                    try {
-                        parsedInput = Integer.parseInt(userRawInput);
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException("숫자를 입력해야 합니다.");
-                    }
-                    if (parsedInput == 1) {
-                        continue;
-                    }
-                    if (parsedInput == 2) {
-                        keepRunning = false;
-                        continue;
-                    }
-                    throw new IllegalArgumentException("답변은 1과 2중 하나를 입력해야 합니다.");
                 }
             }
+
+            System.out.println("게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.");
+            String userCmdInput = Console.readLine();
+            int parsedInput;
+
+            try {
+                parsedInput = Integer.parseInt(userCmdInput);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("숫자 1 또는 2를 입력해야 합니다.");
+            }
+
+            if (parsedInput != 1 && parsedInput != 2)
+                throw new IllegalArgumentException("답변은 1과 2중 하나를 입력해야 합니다.");
+
+            if (parsedInput == 2)
+                keepRunning = false;
         }
     }
 }
