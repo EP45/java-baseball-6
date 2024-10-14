@@ -5,6 +5,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Application {
     public static void main(String[] args) {
@@ -46,22 +47,18 @@ public class Application {
                     }
                     user.add(parsedInput / i % 10);
                 }
+
+                // Debug
                 System.out.println(computer);
                 System.out.println(user);
 
                 // Compare with computer
-                int strike = 0, ball = 0;
-                for (int i = 0; i < 3; i++) {
-                    if (Objects.equals(computer.get(i), user.get(i))) {
-                        strike++;
-                    }
-                }
-                for (int i = 0; i < 3; i++) {
-                    if (user.contains(computer.get(i))) {
-                        ball++;
-                    }
-                }
-                ball -= strike;
+                int strike = (int) IntStream.range(0, 3)
+                        .filter(i -> Objects.equals(computer.get(i), user.get(i)))
+                        .count();
+
+                user.retainAll(computer);
+                int ball = user.size() - strike;
 
                 if (ball != 0)
                     System.out.printf("%d볼", ball);
