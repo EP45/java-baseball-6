@@ -1,8 +1,16 @@
 # 미션 - 숫자 야구
 
-## ✅ 구현할 기능 목록 (rev. 1)
-- [ ] 시작 메시지
-- [ ] 정답 시 재시작/종료 메시지
-- [ ] 랜덤 3자리 생성 using `Randoms.pickNumberInRange(100, 999);`
-- [ ] 문자열 검사(3자리, `100 <= input <= 999`)
-- [ ] 잘못된 값일 경우 `IllegalArgumentException` 발생
+## ✅ 구현할 기능 목록 (rev. 2)
+- [x] 시작 메시지
+- [x] 정답 시 재시작/종료 메시지
+- [x] 랜덤 3자리 생성 using `Randoms.pickNumberInRange(1, 9);`
+- [x] 문자열 검사(3자리, `100 <= input <= 999`)
+- [x] 잘못된 값일 경우 `IllegalArgumentException` 발생
+- [x] 스트라이크 및 볼 출력
+
+## 개선 대기 목록
+- [ ] 볼/스트라이크 계산에 retainAll() 사용
+- [ ] 게임 종료/재시작 코드 위치 재조정
+
+## 리팩토링 대기 목록
+- [ ] 예외 메시지 구체화
