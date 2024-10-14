@@ -10,8 +10,8 @@ import java.util.stream.IntStream;
 public class Application {
     public static void main(String[] args) {
         System.out.println("숫자 야구 게임을 시작합니다.");
-        boolean keepRunning = true;
-        while (keepRunning) {
+        boolean inGame = true;
+        while (inGame) {
             // Determine computer's number
             List<Integer> computer = new ArrayList<>();
             while (computer.size() < 3) {
@@ -21,8 +21,8 @@ public class Application {
                 }
             }
 
-            boolean inGame = true;
-            while (inGame) {
+            boolean inRound = true;
+            while (inRound) {
                 // User input
                 System.out.print("숫자를 입력해주세요 : ");
                 String userGameInput = Console.readLine();
@@ -65,7 +65,7 @@ public class Application {
 
                 if (strike == 3) {
                     System.out.println("3개의 숫자를 모두 맞히셨습니다! 게임 종료");
-                    inGame = false;
+                    inRound = false;
                 }
             }
 
@@ -83,7 +83,7 @@ public class Application {
                 throw new IllegalArgumentException("답변은 1과 2중 하나를 입력해야 합니다.");
 
             if (parsedInput == 2)
-                keepRunning = false;
+                inGame = false;
         }
     }
 }
