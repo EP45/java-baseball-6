@@ -23,36 +23,28 @@ public class Application {
 
             boolean inGame = true;
             while (inGame) {
+                // User input
                 System.out.print("숫자를 입력해주세요 : ");
                 String userGameInput = Console.readLine();
-                int parsedInput;
-
-                // Parse if number
-                try {
-                    parsedInput = Integer.parseInt(userGameInput);
-                } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("숫자를 입력해야 합니다.");
-                }
-
-                // Is it 3 digit?
-                if (parsedInput < 100 || parsedInput > 999)
-                    throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해야 합니다.");
-
-                // Check Duplication
                 List<Integer> user = new ArrayList<>();
-                for (int i = 100; i != 0; i/=10) {
-                    int inputDigit = parsedInput / i % 10;
-                    if (user.contains(inputDigit)) {
+
+                // Convert user's input into list of integers, while checking validity
+                for (char digitChar : userGameInput.toCharArray()) {
+                    if (!Character.isDigit(digitChar))
+                        throw new IllegalArgumentException("숫자를 입력해야 합니다.");
+                    if (user.contains(Character.getNumericValue(digitChar)))
                         throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해야 합니다.");
-                    }
-                    user.add(parsedInput / i % 10);
+
+                    user.add(Character.getNumericValue(digitChar));
                 }
+                if (user.size() != 3)
+                    throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해야 합니다.");
 
                 // Debug
                 System.out.println(computer);
                 System.out.println(user);
 
-                // Compare with computer
+                // Calculate score
                 int strike = (int) IntStream.range(0, 3)
                         .filter(i -> Objects.equals(computer.get(i), user.get(i)))
                         .count();
@@ -60,6 +52,7 @@ public class Application {
                 user.retainAll(computer);
                 int ball = user.size() - strike;
 
+                // Print score
                 if (ball != 0)
                     System.out.printf("%d볼", ball);
                 if (ball != 0 && strike != 0)
