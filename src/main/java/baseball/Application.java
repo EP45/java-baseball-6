@@ -31,14 +31,14 @@ public class Application {
                 // Convert user's input into list of integers, while checking validity
                 for (char digitChar : userGameInput.toCharArray()) {
                     if (!Character.isDigit(digitChar))
-                        throw new IllegalArgumentException("숫자를 입력해야 합니다.");
+                        throw new IllegalArgumentException("You must enter number. You entered: " + digitChar);
                     if (user.contains(Character.getNumericValue(digitChar)))
-                        throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해야 합니다.");
+                        throw new IllegalArgumentException("You must enter 3 different digits. You entered: " + user.toString());
 
                     user.add(Character.getNumericValue(digitChar));
                 }
                 if (user.size() != 3)
-                    throw new IllegalArgumentException("서로 다른 3자리의 수를 입력해야 합니다.");
+                    throw new IllegalArgumentException("You must enter 3 different digits. You entered: " + user.toString());
 
                 // Debug
                 System.out.println(computer);
@@ -73,7 +73,7 @@ public class Application {
             String userCmdInput = Console.readLine();
 
             if (!(userCmdInput.equals("1") || userCmdInput.equals("2")))
-                throw new IllegalArgumentException("숫자 1 또는 2를 입력해야 합니다.");
+                throw new IllegalArgumentException("You must enter 1 or 2. You entered: " + userCmdInput);
 
             if (userCmdInput.equals("2"))
                 inGame = false;
